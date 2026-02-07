@@ -436,13 +436,16 @@ export default function CaseStudies({ lang }: CaseStudiesProps) {
                   <h4 className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-4">
                     {c.results}
                   </h4>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     {cases[activeCase].results.map((result) => (
-                      <div key={result.label} className="text-center p-4 bg-white rounded-xl shadow-sm">
-                        <div className="text-2xl font-bold text-[var(--color-accent)] stat-number">
+                      <div 
+                        key={result.label} 
+                        className="flex-1 flex sm:flex-col items-center sm:items-center gap-3 sm:gap-1 p-4 sm:py-6 bg-white rounded-2xl shadow-sm border border-gray-100"
+                      >
+                        <div className="text-2xl sm:text-3xl font-bold text-[var(--color-accent)] tabular-nums">
                           {result.value}
                         </div>
-                        <div className="text-xs text-[var(--color-text-secondary)] mt-1">
+                        <div className="text-sm sm:text-xs text-[var(--color-text-secondary)] sm:text-center">
                           {result.label}
                         </div>
                       </div>
