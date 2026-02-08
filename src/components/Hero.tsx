@@ -39,7 +39,7 @@ const content = {
 };
 
 function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffix: string; duration?: number }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(value); // Start with final value to prevent flash
   const ref = useRef<HTMLSpanElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -48,6 +48,8 @@ function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffi
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
           setHasAnimated(true);
+          // Reset to 0 and animate up
+          setCount(0);
           let start = 0;
           const end = value;
           const increment = end / (duration * 60);
@@ -115,7 +117,7 @@ export default function Hero({ lang }: HeroProps) {
         />
       </div>
 
-      <div className="container-custom relative z-10 py-32 md:py-40">
+      <div className="container-custom relative z-10 py-16 md:py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <motion.div
@@ -173,7 +175,7 @@ export default function Hero({ lang }: HeroProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative hidden lg:block"
+            className="relative order-first lg:order-last"
           >
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               <Image
@@ -188,14 +190,14 @@ export default function Hero({ lang }: HeroProps) {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3"
+              className="absolute -bottom-4 -left-2 lg:-bottom-6 lg:-left-6 bg-white rounded-2xl shadow-xl p-3 lg:p-4 flex items-center gap-2 lg:gap-3"
             >
-              <div className="w-12 h-12 rounded-full gradient-orange flex items-center justify-center">
-                <Icon name="check" size={28} className="brightness-0 invert" />
+              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full gradient-orange flex items-center justify-center">
+                <Icon name="check" size={24} className="brightness-0 invert" />
               </div>
               <div>
-                <p className="font-bold text-[var(--color-accent)]">{lang === 'en' ? 'Trusted' : '信頼'}</p>
-                <p className="text-sm text-[var(--color-text-secondary)]">{lang === 'en' ? '50+ Enterprises' : '50社以上の実績'}</p>
+                <p className="font-bold text-sm lg:text-base text-[var(--color-accent)]">{lang === 'en' ? 'Trusted' : '信頼'}</p>
+                <p className="text-xs lg:text-sm text-[var(--color-text-secondary)]">{lang === 'en' ? '50+ Enterprises' : '50社以上の実績'}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -206,7 +208,7 @@ export default function Hero({ lang }: HeroProps) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6"
         >
           {c.stats.map((stat, index) => (
             <motion.div

@@ -130,10 +130,11 @@ export default function Process({ lang }: ProcessProps) {
 
         {/* Process steps */}
         <div className="relative">
-          {/* Connection line */}
+          {/* Connection line - desktop only */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-primary-light)] via-[var(--color-primary)] to-[var(--color-primary-light)] -translate-y-1/2 z-0" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
+          {/* Mobile: vertical timeline, Tablet: 2-col grid, Desktop: 5-col grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
             {c.steps.map((step, index) => (
               <motion.div
                 key={step.number}
@@ -144,10 +145,10 @@ export default function Process({ lang }: ProcessProps) {
                 className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-2xl gradient-orange flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-14 h-14 rounded-2xl gradient-orange flex items-center justify-center text-white font-bold text-lg shrink-0">
                     {step.number}
                   </div>
-                  <div className="w-10 h-10 flex items-center justify-center">
+                  <div className="w-10 h-10 flex items-center justify-center shrink-0">
                     <Icon name={step.icon} size={28} />
                   </div>
                 </div>

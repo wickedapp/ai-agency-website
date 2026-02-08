@@ -150,8 +150,8 @@ export default function Services({ lang }: ServicesProps) {
           </div>
         </motion.div>
 
-        {/* Services grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Services grid - 2x2 layout for first 4, then remaining */}
+        <div className="grid sm:grid-cols-2 gap-6">
           {s.map((service, index) => (
             <motion.div
               key={service.title}
